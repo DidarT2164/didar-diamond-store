@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIDAR DIAMOND STORE</title>
+<style>
+:root{--bg:#090b18;--panel:#14182b;--panel2:#1b2140;--purple:#8057ff;--blue:#35b8ff;--text:#f5f6ff;--muted:#aab0cc;--gold:#ffc857}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#28205b 0,transparent 34%),var(--bg);color:var(--text);font:15px Arial,sans-serif}
+header{padding:18px max(18px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff18;background:#090b18cc;position:sticky;top:0;backdrop-filter:blur(12px);z-index:3}
+.brand{font-weight:900;letter-spacing:.7px}.brand span{color:var(--gold)}nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+main{max-width:1100px;margin:auto;padding:28px 18px 60px}.hero{padding:34px 28px;border:1px solid #ffffff20;border-radius:24px;background:linear-gradient(120deg,#21174c,#151a35 65%,#102b49);overflow:hidden}
+.eyebrow{color:#bba8ff;font-weight:bold;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(30px,6vw,54px);margin:12px 0}.hero p{color:var(--muted);max-width:580px;line-height:1.6}.pill{display:inline-block;padding:9px 14px;border-radius:99px;background:#ffffff12;color:#ddd5ff;font-size:12px}
+h2{margin:30px 0 14px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.package{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid #ffffff18;border-radius:17px;padding:17px;text-align:left;color:var(--text);cursor:pointer;min-height:145px;transition:.15s}.package:hover,.package.active{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 0 0 1px #35b8ff44}.gem{font-size:25px}.qty{font-size:22px;font-weight:900;margin:9px 0 5px}.price{color:var(--gold);font-weight:bold}.small{font-size:12px;color:var(--muted)}
+.panel{margin-top:22px;background:var(--panel);border:1px solid #ffffff18;border-radius:20px;padding:22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;color:var(--muted);font-size:13px;margin-bottom:7px}input,select{width:100%;padding:14px;border-radius:11px;border:1px solid #ffffff24;background:#0d1123;color:white;outline:none}input:focus,select:focus{border-color:var(--blue)}.payrow{display:flex;gap:10px;flex-wrap:wrap}.pay{border:1px solid #ffffff24;background:#0d1123;color:white;padding:12px 18px;border-radius:11px;cursor:pointer}.pay.active{border-color:var(--purple);background:#35256c}.btn{border:0;background:linear-gradient(90deg,var(--purple),#3c9cff);color:white;font-weight:800;padding:15px 22px;border-radius:12px;cursor:pointer;width:100%;margin-top:16px}.notice{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px}.summary{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #ffffff20;margin-top:18px;padding-top:15px}.tag{color:#8ee3ff}
+footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid #ffffff15;font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}nav{display:none}.formgrid{grid-template-columns:1fr}.hero{padding:27px 20px}}
+</style>
+</head>
+<body>
+<header><div class="brand">💎 DIDAR <span>DIAMOND STORE</span></div><nav><a href="#packages">Packages</a><a href="#order">Order</a><a href="#help">Support</a></nav></header>
+<main>
+<section class="hero"><span class="pill">FAST • SIMPLE • SECURE ORDERING</span><div class="eyebrow">FREE FIRE TOP-UP STORE</div><h1>Power up your game.<br><span style="color:#9c83ff">Get more diamonds.</span></h1><p>Choose a package, enter your Player UID and submit your order. This is a starter storefront preview; live UID lookup and payment confirmation must be connected before accepting real orders.</p></section>
+<h2 id="packages">Choose Diamond Package</h2>
+<div class="grid" id="packageGrid"></div>
+<section class="panel" id="order"><h2 style="margin-top:0">Complete Your Order</h2>
+<div class="formgrid"><div><label for="uid">Player UID</label><input id="uid" inputmode="numeric" placeholder="Enter your Free Fire UID"></div><div><label for="player">Player Name</label><input id="player" placeholder="Player name (lookup not connected)" readonly></div></div>
+<p class="notice">UID lookup is not connected in this demo. Do not enter payment or personal details until the store backend and trusted API are configured.</p>
+<h3>Payment Method</h3><div class="payrow"><button class="pay active" data-pay="bKash">bKash</button><button class="pay" data-pay="Nagad">Nagad</button></div>
+<div class="formgrid" style="margin-top:15px"><div><label for="sender">Your payment number</label><input id="sender" placeholder="01XXXXXXXXX"></div><div><label for="trx">Transaction ID</label><input id="trx" placeholder="Enter TrxID after payment"></div></div>
+<div class="summary"><div><div class="small">Selected package</div><strong id="selectedName">110 Diamonds</strong></div><div><div class="small">Demo price</div><strong class="price" id="selectedPrice">৳ 100</strong></div><div><div class="small">Payment</div><strong id="selectedPay">bKash</strong></div></div>
+<button class="btn" id="submit">Preview Order Details</button><div id="result" class="notice" aria-live="polite"></div>
+</section>
+<section id="help" class="panel"><h2 style="margin-top:0">Need Help?</h2><p class="notice">Contact store support on WhatsApp for order questions. Add your verified support number here before publishing.</p></section>
+</main><footer>© DIDAR DIAMOND STORE • Unofficial independent top-up storefront. Not affiliated with Garena.</footer>
+<script>
+const packages=[["25 Diamonds",25,25],["50 Diamonds",50,45],["115 Diamonds",115,95],["240 Diamonds",240,190],["355 Diamonds",355,280],["610 Diamonds",610,470],["1240 Diamonds",1240,920],["2200 Diamonds",2200,1590]];
+let selected=0,payment="bKash";
+const grid=document.getElementById("packageGrid");
+packages.forEach((p,i)=>{const b=document.createElement("button");b.className="package"+(i===0?" active":"");b.innerHTML=`<div class="gem">💎</div><div class="qty">${p[1].toLocaleString()} Diamonds</div><div class="price">৳ ${p[2].toLocaleString()}</div><div class="small">Package #${String(i+1).padStart(2,"0")}</div>`;b.onclick=()=>{selected=i;document.querySelectorAll(".package").forEach(x=>x.classList.remove("active"));b.classList.add("active");update()};grid.appendChild(b)});
+function update(){document.getElementById("selectedName").textContent=packages[selected][0];document.getElementById("selectedPrice").textContent="৳ "+packages[selected][2].toLocaleString();document.getElementById("selectedPay").textContent=payment}
+document.querySelectorAll(".pay").forEach(b=>b.onclick=()=>{payment=b.dataset.pay;document.querySelectorAll(".pay").forEach(x=>x.classList.remove("active"));b.classList.add("active");update()});
+document.getElementById("submit").onclick=()=>{const uid=document.getElementById("uid").value.trim();if(!/^[0-9]{5,15}$/.test(uid)){document.getElementById("result").textContent="Please enter a valid numeric Player UID (5–15 digits).";return}document.getElementById("result").textContent=`Demo preview only — UID: ${uid} | ${packages[selected][0]} | ৳${packages[selected][2]} | ${payment}. No order or payment has been submitted.`};
+</script></body></html>
